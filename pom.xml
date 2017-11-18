@@ -11,6 +11,7 @@
     <modules>
         <module>base-tool</module>
         <module>hobby-file</module>
+        <module>hobby-lagou</module>
     </modules>
 
     <build>
