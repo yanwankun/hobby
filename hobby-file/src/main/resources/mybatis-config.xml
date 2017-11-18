@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <!--lazyLoadingEnabled: lazy loading开关,默认为true。
+        全局性设置懒加载。如果设为‘false’，则所有相关联的都会被初始化加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--aggressiveLazyLoading 默认true：当访问任何一个属性都会加载所有的其他lazy load属性,
+        即使你根本没有调用哪个lazy load属性,说白了就是aggressiveLazyLoading=true,则lazy load等于没用,
+        所以要使用lazy load还是将其设为false    -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="username" value="yanwankun"/>
+                <property name="password" value="yanwankun"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/yan_hobby"/>
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="./mappers/SentenceMapper.xml"/>
+    </mappers>
+
+</configuration>
