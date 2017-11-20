@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wankun.yan.hobby.lagou.dao.LaGouCompanyIdLogMapper">
+    
+    <sql id="requestAllFields">
+        <![CDATA[
+            id,
+            company_id AS companyId,
+            company_name AS companyName,
+            status,
+            status_text AS statusText,
+            create_time AS createTime,
+            update_time AS updateTime
+        ]]>
+    </sql>
+    
+    <sql id="whereClause">
+        <where>
+            <if test="null!=id">AND id = #{id}</if>
+            <if test="null!=companyId">AND company_id = #{companyId}</if>
+            <if test="null!=companyName and ''!=companyName">AND company_name = #{companyName}</if>
+            <if test="null!=status">AND status = #{status}</if>
+            <if test="null!=statusText and ''!=statusText">AND status_text = #{statusText}</if>
+            <include refid="extendedWhereClause" />
+        </where>
+    </sql>
+    
+    <insert id="add" useGeneratedKeys="true" parameterType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog" keyProperty="id">
+        INSERT INTO tb_la_gou_company_id_log
+        <trim prefix="(" suffix=")" prefixOverrides=",">
+            <if test="null!=companyId">,company_id</if>
+            <if test="null!=companyName and ''!=companyName">,company_name</if>
+            <if test="null!=status">,status</if>
+            <if test="null!=statusText and ''!=statusText">,status_text</if>
+            <if test="null!=createTime">,create_time</if>
+            <if test="null!=updateTime">,update_time</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" prefixOverrides=",">
+            <if test="null!=companyId">,#{companyId}</if>
+            <if test="null!=companyName and ''!=companyName">,#{companyName}</if>
+            <if test="null!=status">,#{status}</if>
+            <if test="null!=statusText and ''!=statusText">,#{statusText}</if>
+            <if test="null!=createTime">,#{createTime}</if>
+            <if test="null!=updateTime">,#{updateTime}</if>
+        </trim>
+    </insert>
+    
+    <update id="update" parameterType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog">
+        UPDATE tb_la_gou_company_id_log
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="null!=companyId">,company_id = #{companyId}</if>
+            <if test="null!=companyName and ''!=companyName">,company_name = #{companyName}</if>
+            <if test="null!=status">,status = #{status}</if>
+            <if test="null!=statusText and ''!=statusText">,status_text = #{statusText}</if>
+            <if test="null!=createTime">,create_time = #{createTime}</if>
+            <if test="null!=updateTime">,update_time = #{updateTime}</if>
+            <include refid="extendedUpdateSql" />
+        </trim>
+        WHERE id = #{id}
+        <include refid="extendedWhereClause" />
+    </update>
+    
+    <select id="query" parameterType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog" resultType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog">
+        SELECT <include refid="requestAllFields"/> FROM tb_la_gou_company_id_log
+        <include refid="whereClause" />
+        <include refid="extendedOrderByClause" />
+        <if test="null!=requestOffset and null!=requestCount">
+            LIMIT #{requestOffset}, #{requestCount}
+        </if>
+    </select>
+    
+    <select id="pageQuery" parameterType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog" resultType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog">
+        SELECT <include refid="requestAllFields"/> FROM tb_la_gou_company_id_log
+        <include refid="whereClause" />
+        <include refid="extendedOrderByClause" />
+    </select>
+    
+    <select id="get" parameterType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog" resultType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog">
+        SELECT <include refid="requestAllFields"/> FROM tb_la_gou_company_id_log
+        <include refid="whereClause" />
+        <include refid="extendedOrderByClause" />
+        <if test="null!=requestCount">
+            LIMIT 1
+        </if>
+    </select>
+    
+    <select id="getById" parameterType="long" resultType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog">
+        SELECT <include refid="requestAllFields"/> FROM tb_la_gou_company_id_log WHERE id = #{id}
+    </select>
+    
+    <select id="count" parameterType="wankun.yan.hobby.lagou.bean.LaGouCompanyIdLog" resultType="int">
+        SELECT COUNT(1) FROM tb_la_gou_company_id_log <include refid="whereClause" />
+    </select>
+    
+    <!-- 扩展的更新等语句（自定义）-->
+    <sql id="extendedUpdateSql">
+        <if test="null!=extendedParameter">
+            
+        </if>
+    </sql>
+    
+    <!-- 扩展的条件过滤语句（自定义）-->
+    <sql id="extendedWhereClause">
+        <if test="null!=extendedParameter">
+            
+        </if>
+    </sql>
+    
+    <!-- 扩展的排序等语句（自定义）-->
+    <sql id="extendedOrderByClause">
+        <if test="null!=extendedParameter">
+            <if test="null!=extendedParameter.orderBy">${extendedParameter.orderBy.content}</if>
+            
+        </if>
+    </sql>
+    
+</mapper>
